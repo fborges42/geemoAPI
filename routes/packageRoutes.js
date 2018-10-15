@@ -1,44 +1,44 @@
 var express = require('express');
 
-var routes = function(Coach) {
-  var coachRouter = express.Router();
+var routes = function(Package) {
+  var packageRouter = express.Router();
 
-  coachRouter
-    .route('/Coach')
+  packageRouter
+    .route('/Package')
     .get(function(req, res) {
       var query = {};
       if (req.query.user_id) {
         query.user_id = req.query.user_id;
       }
 
-      Coach.find(query, function(error, coaches) {
+      Package.find(query, function(error, package) {
         if (error) {
           res.status(500).send(error);
         } else {
-          res.json(coaches);
+          res.json(package);
         }
       });
     })
     .post(function(req, res) {
-      var coach = new Coach(req.body);
-      coach.save();
+      var package = new Package(req.body);
+      package.save();
 
-      res.status(201).send(coach);
+      res.status(201).send(package);
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});
 
-  coachRouter.route('/:coachId').get(function(req, res) {
-    Coach.findById(req.body.coachId, function(error, coach) {
+  packageRouter.route('/:packageId').get(function(req, res) {
+    Package.findById(req.params.packageId, function(error, package) {
       if (error) {
         res.status(500).send(error);
       } else {
-        res.json(coach);
+        res.json(package);
       }
     });
   });
 
-  return coachRouter;
+  return packageRouter;
 };
 
 module.exports = routes;

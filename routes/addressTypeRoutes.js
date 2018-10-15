@@ -1,44 +1,44 @@
 var express = require('express');
 
-var routes = function(Coach) {
-  var coachRouter = express.Router();
+var routes = function(AddressType) {
+  var addressTypeRouter = express.Router();
 
-  coachRouter
-    .route('/Coach')
+  addressTypeRouter
+    .route('/')
     .get(function(req, res) {
       var query = {};
-      if (req.query.user_id) {
-        query.user_id = req.query.user_id;
+      if (req.query._id) {
+        query._id = req.query._id;
       }
 
-      Coach.find(query, function(error, coaches) {
+      AddressType.find(query, function(error, addressTypees) {
         if (error) {
           res.status(500).send(error);
         } else {
-          res.json(coaches);
+          res.json(addressTypees);
         }
       });
     })
     .post(function(req, res) {
-      var coach = new Coach(req.body);
-      coach.save();
+      var addressType = new AddressType(req.body);
+      addressType.save();
 
-      res.status(201).send(coach);
+      res.status(201).send(addressType);
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});
 
-  coachRouter.route('/:coachId').get(function(req, res) {
-    Coach.findById(req.body.coachId, function(error, coach) {
+  addressTypeRouter.route('/:addressTypeId').get(function(req, res) {
+    AddressType.findById(req.params.addressTypeId, function(error, addressType) {
       if (error) {
         res.status(500).send(error);
       } else {
-        res.json(coach);
+        res.json(addressType);
       }
     });
   });
 
-  return coachRouter;
+  return addressTypeRouter;
 };
 
 module.exports = routes;

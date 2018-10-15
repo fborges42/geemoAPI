@@ -4,7 +4,7 @@ var routes = function(Coach) {
   var coachRouter = express.Router();
 
   coachRouter
-    .route('/Coach')
+    .route('/')
     .get(function(req, res) {
       var query = {};
       if (req.query.user_id) {
