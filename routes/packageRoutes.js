@@ -21,9 +21,12 @@ var routes = function(Package) {
     })
     .post(function(req, res) {
       var package = new Package(req.body);
-      package.save();
-
-      res.status(201).send(package);
+      package.save(function(err) {
+        if (err) {
+          res.status(400).send(err.message);
+        }
+        res.status(201).send(package);
+      });
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});

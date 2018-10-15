@@ -21,15 +21,21 @@ var routes = function(PaymentType) {
     })
     .post(function(req, res) {
       var paymentType = new PaymentType(req.body);
-      paymentType.save();
-
-      res.status(201).send(paymentType);
+      paymentType.save(function(err) {
+        if (err) {
+          res.status(400).send(err.message);
+        }
+        res.status(201).send(paymentType);
+      });
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});
 
   paymentTypeRouter.route('/:paymentTypeId').get(function(req, res) {
-    PaymentType.findById(req.paramsy.paymentTypeId, function(error, paymentType) {
+    PaymentType.findById(req.params.paymentTypeId, function(
+      error,
+      paymentType
+    ) {
       if (error) {
         res.status(500).send(error);
       } else {

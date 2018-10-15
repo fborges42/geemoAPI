@@ -21,9 +21,12 @@ var routes = function(SubscriptionPlan) {
     })
     .post(function(req, res) {
       var subscriptionPlan = new SubscriptionPlan(req.body);
-      subscriptionPlan.save();
-
-      res.status(201).send(subscriptionPlan);
+      subscriptionPlan.save(function(err) {
+        if (err) {
+          res.status(400).send(err.message);
+        }
+        res.status(201).send(subscriptionPlan);
+      });
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});

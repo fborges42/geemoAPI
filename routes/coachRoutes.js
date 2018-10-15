@@ -21,9 +21,12 @@ var routes = function(Coach) {
     })
     .post(function(req, res) {
       var coach = new Coach(req.body);
-      coach.save();
-
-      res.status(201).send(coach);
+      coach.save(function(err) {
+        if (err) {
+          res.status(400).send(err.message);
+        }
+        res.status(201).send(coach);
+      });
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});

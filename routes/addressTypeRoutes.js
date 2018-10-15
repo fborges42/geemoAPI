@@ -11,25 +11,31 @@ var routes = function(AddressType) {
         query._id = req.query._id;
       }
 
-      AddressType.find(query, function(error, addressTypees) {
+      AddressType.find(query, function(error, addressTypes) {
         if (error) {
           res.status(500).send(error);
         } else {
-          res.json(addressTypees);
+          res.json(addressTypes);
         }
       });
     })
     .post(function(req, res) {
       var addressType = new AddressType(req.body);
-      addressType.save();
-
-      res.status(201).send(addressType);
+      addressType.save(function(err) {
+        if (err) {
+          res.status(400).send(err.message);
+        }
+        res.status(201).send(addressType);
+      });
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});
 
   addressTypeRouter.route('/:addressTypeId').get(function(req, res) {
-    AddressType.findById(req.params.addressTypeId, function(error, addressType) {
+    AddressType.findById(req.params.addressTypeId, function(
+      error,
+      addressType
+    ) {
       if (error) {
         res.status(500).send(error);
       } else {

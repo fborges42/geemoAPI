@@ -20,9 +20,12 @@ var routes = function(Client) {
     })
     .post(function(req, res) {
       var client = new Client(req.body);
-      client.save();
-
-      res.status(201).send(client);
+      client.save(function(err) {
+        if (err) {
+          res.status(400).send(err.message);
+        }
+        res.status(201).send(client);
+      });
     })
     .put(function(req, res) {})
     .delete(function(req, res) {});
