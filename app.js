@@ -2,7 +2,8 @@ var express = require('express'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser');
 
-mongoose.connect('mongodb://testing:123testing@ds131137.mlab.com:31137/geemo');
+mongoose.connect('mongodb://localhost/geemo');
+
 var UserModel = require('./models/userModel'),
   PackageModel = require('./models/packageModel'),
   PaymentTypeModel = require('./models/paymentTypeModel'),
