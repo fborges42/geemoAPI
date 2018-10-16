@@ -1,4 +1,6 @@
 # geemoAPI
+![Logo](https://i.postimg.cc/HsSK7CHv/Logo-Makr-7w-Fk-CD.png)
+
 NodeJS rest API with mongoDB using basic concepts for geemo application.
 
 # Table of Contents
