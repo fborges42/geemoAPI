@@ -2,7 +2,10 @@ var express = require('express'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser');
 
-mongoose.connect('mongodb://localhost/geemo');
+mongoose.connect(
+  'mongodb://localhost/geemo',
+  { useNewUrlParser: true }
+);
 
 var UserModel = require('./models/userModel'),
   PackageModel = require('./models/packageModel'),
