@@ -1,10 +1,11 @@
 var express = require('express');
+memoryCache = require('../cache/memoryCache');
 
 var routes = function(User) {
   var userRouter = express.Router();
   userRouter
     .route('/')
-    .get(function(req, res) {
+    .get(memoryCache(60), function(req, res) {
       var query = {};
       if (req.query._id) {
         query._id = req.query._id;
@@ -30,7 +31,7 @@ var routes = function(User) {
     .put(function(req, res) {})
     .delete(function(req, res) {});
 
-  userRouter.route('/:userId').get(function(req, res) {
+  userRouter.route('/:userId').get(memoryCache(60), function(req, res) {
     User.findById(req.params.userId, function(error, user) {
       if (error) {
         res.status(500).send(error);
