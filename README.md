@@ -14,7 +14,7 @@ NodeJS rest API with mongoDB using basic concepts for geemo application.
 * N/A
 
 # <a name="team-members"></a>Team Members
-* "fborges"
+* "fborges42"
 * "esparga"
 
 # <a name="license"></a>License
